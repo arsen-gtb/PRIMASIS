@@ -88,7 +88,7 @@
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
-                <td contenteditable="true"></td>
+                <td contenteditable="true">123456</td>
                 <td contenteditable="true">mitra</td>
                 <td class="col-select" style="${deleteMode ? '' : 'display:none;'}">
                     <input type="checkbox" class="chk-del">
@@ -101,9 +101,17 @@
             const rows = document.querySelectorAll("#userTable tbody tr");
             let newUsers = [];
             let valid = true;
+            let passwordValid = true;
 
             rows.forEach(row => {
                 const cells = row.querySelectorAll("td");
+                const passText = cells[6].innerText.trim();
+
+                // Validasi password harus 6 digit angka (0-9)
+                if (!/^\d{6}$/.test(passText)) {
+                    passwordValid = false;
+                }
+
                 const u = {
                     id: cells[0].innerText.trim(),
                     nama: cells[1].innerText.trim(),
@@ -111,18 +119,23 @@
                     hp: cells[3].innerText.trim(),
                     alamat: cells[4].innerText.trim(),
                     username: cells[5].innerText.trim(),
-                    password: cells[6].innerText.trim(),
+                    password: Number(passText), // Menyimpan password sebagai tipe data numerik
                     hakAkses: cells[7].innerText.trim()
                 };
 
-                if (!u.id || !u.nama || !u.pic || !u.hp || !u.alamat || !u.username || !u.password || !u.hakAkses) {
+                if (!u.id || !u.nama || !u.pic || !u.hp || !u.alamat || !u.username || isNaN(u.password) || !u.hakAkses) {
                     valid = false;
                 }
                 newUsers.push(u);
             });
 
             if (!valid) {
-                alert("Mohon isi data dengan lengkap!");
+                alert("Mohon isi data dengan lengkap dan benar!");
+                return;
+            }
+
+            if (!passwordValid) {
+                alert("Password harus berupa angka (0-9) dan tepat terdiri dari 6 digit!");
                 return;
             }
 
