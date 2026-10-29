@@ -119,11 +119,11 @@
                     hp: cells[3].innerText.trim(),
                     alamat: cells[4].innerText.trim(),
                     username: cells[5].innerText.trim(),
-                    password: cells[6].innerText.trim(),
+                    password: passText, // Menyimpan password sebagai string agar aman untuk leading zeros (angka 0 di depan)
                     hakAkses: cells[7].innerText.trim()
                 };
 
-                if (!u.id || !u.nama || !u.pic || !u.hp || !u.alamat || !u.username || isNaN(u.password) || !u.hakAkses) {
+                if (!u.id || !u.nama || !u.pic || !u.hp || !u.alamat || !u.username || !u.password || !u.hakAkses) {
                     valid = false;
                 }
                 newUsers.push(u);
@@ -148,7 +148,6 @@
         function toggleDeleteMode() {
             deleteMode = !deleteMode;
 
-            // Jika tombol Delete diklik saat mode aktif (artinya selesai memilih dan ingin menghapus)
             if (!deleteMode) {
                 const checkboxes = document.querySelectorAll(".chk-del:checked");
                 if (checkboxes.length > 0) {
@@ -158,7 +157,6 @@
                             .filter(idx => !isNaN(idx));
                         
                         let users = getUsers();
-                        // Filter data yang indeksnya tidak ada di dalam daftar hapus
                         users = users.filter((_, idx) => !indicesToDelete.includes(idx));
                         saveUsers(users);
                     }
@@ -167,12 +165,10 @@
 
             renderTable();
 
-            // Ubah teks tombol secara opsional untuk kenyamanan pengguna
             const btnDelete = document.getElementById("btnDelete");
             btnDelete.innerText = deleteMode ? "Done Delete" : "Delete";
         }
 
-        // Inisialisasi awal saat halaman dimuat
         renderTable();
     </script>
 </body>
