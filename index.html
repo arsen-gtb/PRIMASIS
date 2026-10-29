@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="password" required maxlength="6">
+                <input type="password" id="password" required>
             </div>
             <button type="submit" style="width: 100%;">LOGIN</button>
         </form>
@@ -36,16 +36,9 @@
             e.preventDefault();
             const u = document.getElementById("username").value;
             const p = document.getElementById("password").value;
-
-            // Validasi password harus berupa angka 0-9 dan tepat 6 digit
-            if (!/^\d{6}$/.test(p)) {
-                alert("Password harus berupa angka (0-9) dan terdiri dari 6 digit!");
-                return;
-            }
-
             const users = getUsers();
-            // Pencocokan data dengan mencocokkan password sebagai string secara konsisten
-            const user = users.find(x => x.username === u && String(x.password) === String(p));
+
+            const user = users.find(x => x.username === u && x.password === p);
             if (user) {
                 localStorage.setItem("currentUser", JSON.stringify(user));
                 if (user.hakAkses === "admin") {
