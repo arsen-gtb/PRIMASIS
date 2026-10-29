@@ -88,7 +88,7 @@
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
                 <td contenteditable="true"></td>
-                <td contenteditable="true">123456</td>
+                <td contenteditable="true"></td>
                 <td contenteditable="true">mitra</td>
                 <td class="col-select" style="${deleteMode ? '' : 'display:none;'}">
                     <input type="checkbox" class="chk-del">
@@ -101,17 +101,9 @@
             const rows = document.querySelectorAll("#userTable tbody tr");
             let newUsers = [];
             let valid = true;
-            let passwordValid = true;
 
             rows.forEach(row => {
                 const cells = row.querySelectorAll("td");
-                const passText = cells[6].innerText.trim();
-
-                // Validasi password harus 6 digit angka (0-9)
-                if (!/^\d{6}$/.test(passText)) {
-                    passwordValid = false;
-                }
-
                 const u = {
                     id: cells[0].innerText.trim(),
                     nama: cells[1].innerText.trim(),
@@ -119,7 +111,7 @@
                     hp: cells[3].innerText.trim(),
                     alamat: cells[4].innerText.trim(),
                     username: cells[5].innerText.trim(),
-                    password: passText, // Menyimpan password sebagai string agar aman untuk leading zeros (angka 0 di depan)
+                    password: cells[6].innerText.trim(),
                     hakAkses: cells[7].innerText.trim()
                 };
 
@@ -130,12 +122,7 @@
             });
 
             if (!valid) {
-                alert("Mohon isi data dengan lengkap dan benar!");
-                return;
-            }
-
-            if (!passwordValid) {
-                alert("Password harus berupa angka (0-9) dan tepat terdiri dari 6 digit!");
+                alert("Mohon isi data dengan lengkap!");
                 return;
             }
 
@@ -148,6 +135,7 @@
         function toggleDeleteMode() {
             deleteMode = !deleteMode;
 
+            // Jika tombol Delete diklik saat mode aktif (artinya selesai memilih dan ingin menghapus)
             if (!deleteMode) {
                 const checkboxes = document.querySelectorAll(".chk-del:checked");
                 if (checkboxes.length > 0) {
@@ -157,6 +145,7 @@
                             .filter(idx => !isNaN(idx));
                         
                         let users = getUsers();
+                        // Filter data yang indeksnya tidak ada di dalam daftar hapus
                         users = users.filter((_, idx) => !indicesToDelete.includes(idx));
                         saveUsers(users);
                     }
@@ -165,10 +154,12 @@
 
             renderTable();
 
+            // Ubah teks tombol secara opsional untuk kenyamanan pengguna
             const btnDelete = document.getElementById("btnDelete");
             btnDelete.innerText = deleteMode ? "Done Delete" : "Delete";
         }
 
+        // Inisialisasi awal saat halaman dimuat
         renderTable();
     </script>
 </body>
