@@ -44,8 +44,8 @@
             }
 
             const users = getUsers();
-            // Pencocokan data dengan mengonversi password ke tipe numerik
-            const user = users.find(x => x.username === u && Number(x.password) === Number(p));
+            // Pencocokan data dengan mencocokkan password sebagai string secara konsisten
+            const user = users.find(x => x.username === u && String(x.password) === String(p));
             if (user) {
                 localStorage.setItem("currentUser", JSON.stringify(user));
                 if (user.hakAkses === "admin") {
