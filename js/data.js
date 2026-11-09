@@ -1,8 +1,8 @@
 // Inisialisasi Database Awal
 const TABEL_01_DEFAULT = [
-    { id: "admin", nama: "Supplier", pic: "Chusnul Intan Alfiana", hp: "081234567890", alamat: "Klaten", username: "chusnul", password: "123450", hakAkses: "admin" },
-    { id: "mitra_1", nama: "SMK Muhammadiyah 4", pic: "Siti", hp: "085678901234", alamat: "Klaten", username: "smkmuh4", password: "123451", hakAkses: "mitra" },
-    { id: "mitra_2", nama: "SMA N Mojo", pic: "Sari", hp: "085234567890", alamat: "Klaten", username: "smanmojo", password: "123452", hakAkses: "mitra" }
+    { id: "admin", nama: "Supplier", pic: "Chusnul Intan Alfiana", hp: "081234567890", alamat: "Sragen", username: "chusnul", password: "123450", hakAkses: "admin" },
+    { id: "mitra_1", nama: "Bisnis Center SMK Muhammadiyah 4 Sragen", pic: "Wahyu Wismawati, S.E.I., M.Ak.,Gr", hp: "085678901234", alamat: "Jl. Sukowati No. 2 Sine, Sragen Tengah, Sragen, Jawa Tengah 57211", username: "smkmuh4", password: "123451", hakAkses: "mitra" },
+    { id: "mitra_2", nama: "Kantin SMA N Mojogedang", pic: "Suyati", hp: "085234567890", alamat: "Kedungjeruk, Mojogedang, Karanganyar, Jawa Tengah 57752", username: "smanmojo", password: "123452", hakAkses: "mitra" }
 ];
 
 const TABEL_02_DEFAULT = [
